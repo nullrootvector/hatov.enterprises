@@ -1,301 +1,370 @@
-<html><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hatov Enterprises: Empowering Collaborative Growth</title>
-<style>
-    :root {
-        --primary-color: #0038b8;
-        --secondary-color: #f7f7f7;
-        --accent-color: #005430;
-        --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <!-- Meta tags for character set and viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hatov Enterprises: Empowering Collaborative Growth</title>
+    
+    <!-- Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Internal CSS for custom styles -->
+    <style>
+        /* Sets the default font and background colors for the entire page */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark Gray-Blue */
+            color: #E5E7EB; /* Light Gray for text */
+        }
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+        /* A subtle gradient used for the hero section and other backgrounds for depth */
+        .gradient-bg {
+            background: linear-gradient(135deg, #111827 0%, #1F2937 50%, #111827 100%);
+        }
 
-    body {
-        font-family: var(--font-family);
-        font-size: 16px;
-        line-height: 1.5;
-        color: #333;
-    }
+        /* A modern hover effect for card elements to provide visual feedback */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
+        .card-hover:hover {
+            transform: translateY(-8px); /* Lifts the card on hover */
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+        }
+        
+        /* Animation class for revealing elements as they scroll into view */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
 
-    header {
-        background-color: var(--primary-color);
-        color: white;
-        padding: 20px 0;
-    }
+        /* The state of the element once it becomes visible */
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    nav ul {
-        display: flex;
-        justify-content: space-around;
-        list-style-type: none;
-    }
-
-    nav ul li a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    .hero {
-        background-image: url('hero.png');
-        background-size: cover;
-        background-position: center;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: white;
-    }
-
-    .hero-content {
-        background-color: rgba(0, 0, 0, 0.6);
-        padding: 40px;
-        border-radius: 10px;
-    }
-
-    h1 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-    }
-
-    .cta-button {
-        display: inline-block;
-        background-color: var(--accent-color);
-        color: white;
-        padding: 12px 24px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-    }
-
-    .cta-button:hover {
-        background-color: #FCB03F;
-    }
-
-    section {
-        padding: 80px 0;
-    }
-
-    .section-title {
-        font-size: 2rem;
-        margin-bottom: 40px;
-        text-align: center;
-        color: var(--primary-color);
-    }
-
-    .two-column {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .column {
-        flex: 1;
-        padding: 20px;
-    }
-
-    .column img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 10px;
-    }
-
-    .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-    }
-
-    .portfolio-item {
-        background-color: var(--secondary-color);
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-    }
-
-    .portfolio-item img {
-        max-width: 150px;
-        height: auto;
-        margin-bottom: 15px;
-    }
-
-    footer {
-        background-color: var(--primary-color);
-        color: white;
-        padding: 40px 0;
-        text-align: center;
-    }
-
-    .social-links {
-        margin-top: 20px;
-    }
-
-    .social-links a {
-        color: white;
-        font-size: 24px;
-        margin: 0 10px;
-    }
-</style>
+        /* Styling for the process steps timeline */
+        .process-step {
+            position: relative;
+            padding-left: 2.5rem; /* Space for the line and circle */
+            padding-bottom: 2.5rem;
+        }
+        .process-step:last-child {
+            padding-bottom: 0;
+        }
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem; /* Centered with the circle */
+            top: 0.75rem;
+            bottom: -0.75rem;
+            width: 2px;
+            background-color: #4F46E5; /* Indigo */
+        }
+        .process-step:last-child::before {
+            display: none;
+        }
+        .process-step::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 1.5rem;
+            width: 1.5rem;
+            border-radius: 9999px;
+            background-color: #111827;
+            border: 2px solid #4F46E5;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <nav class="container">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#opportunities">Opportunities</a></li>
-                <li><a href="#values">Values</a></li>
-                <li><a href="#contact">Connect</a></li>
-            </ul>
+<body class="antialiased">
+
+    <!-- ============================================= -->
+    <!-- Header & Navigation Bar                     -->
+    <!-- ============================================= -->
+    <header id="header" class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo/Brand Name -->
+                <a href="#home" class="text-2xl font-bold text-white">HATOV</a>
+                
+                <!-- Desktop Navigation Links -->
+                <ul class="hidden md:flex items-center space-x-8">
+                    <li><a href="#about" class="text-gray-300 hover:text-white transition-colors duration-300">About</a></li>
+                    <li><a href="#portfolio" class="text-gray-300 hover:text-white transition-colors duration-300">Portfolio</a></li>
+                    <li><a href="#values" class="text-gray-300 hover:text-white transition-colors duration-300">Values</a></li>
+                    <li><a href="#opportunities" class="text-gray-300 hover:text-white transition-colors duration-300">Opportunities</a></li>
+                </ul>
+                
+                <!-- Desktop Connect Button -->
+                <a href="#contact" class="hidden md:inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300">
+                    Connect
+                </a>
+                
+                <!-- Mobile Menu Button (Hamburger Icon) -->
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu (Initially Hidden) -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                 <ul class="flex flex-col space-y-4">
+                    <li><a href="#about" class="block py-2 text-gray-300 hover:text-white transition-colors duration-300">About</a></li>
+                    <li><a href="#portfolio" class="block py-2 text-gray-300 hover:text-white transition-colors duration-300">Portfolio</a></li>
+                    <li><a href="#values" class="block py-2 text-gray-300 hover:text-white transition-colors duration-300">Values</a></li>
+                    <li><a href="#opportunities" class="block py-2 text-gray-300 hover:text-white transition-colors duration-300">Opportunities</a></li>
+                    <li><a href="#contact" class="mt-2 inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300">Connect</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
 
     <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Empowering Collaborative Growth through Strategic Partnerships</h1>
-                <a href="#opportunities" class="cta-button">Explore Partnership Opportunities</a>
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden gradient-bg">
+            <div class="absolute inset-0 bg-cover bg-center opacity-50" style="background-image: url('hero.png');"></div>
+            <div class="relative z-10 px-6">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6">Empowering Collaborative Growth <br class="hidden md:block"> Through <span class="text-indigo-400">Strategic Partnerships</span></h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10">We are a forward-thinking management agency dedicated to fostering innovation and unlocking true potential by connecting our clients with the right people, resources, and opportunities.</p>
+                <a href="#opportunities" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105">Explore Opportunities</a>
             </div>
         </section>
 
-        <section id="about" class="container">
-            <br>
-            <h2 class="section-title">About Us</h2>
-            <div class="two-column">
-                <div class="column">
-                    <p>Hatov Enterprises is a forward-thinking management agency dedicated to empowering innovative companies to reach new heights. We believe that collaboration is key to unlocking true potential, which is why we specialize in fostering growth and innovation through strategic partnerships. By connecting our clients with the right people, resources, and opportunities, we help them navigate the ever-evolving business landscape and stay ahead of the curve. Our team of experts works closely with each company to understand their unique needs and goals, developing tailored strategies that drive success and propel them towards a brighter future. Whether it's identifying new market opportunities, optimizing operations, or simply providing guidance and support, we're committed to helping our partners thrive in an increasingly competitive world.</p>
+        <!-- About Us & Our Approach Section -->
+        <section id="about" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                <div class="reveal grid md:grid-cols-2 gap-12 md:gap-20 items-center mb-24">
+                    <div class="order-2 md:order-1">
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">About Us</h2>
+                        <p class="text-gray-400 mb-6">Hatov Enterprises is a forward-thinking management agency dedicated to empowering innovative companies to reach new heights. We specialize in fostering growth and innovation through strategic partnerships, developing tailored strategies that drive success and propel our partners towards a brighter future.</p>
+                        <a href="#contact" class="text-indigo-400 hover:text-indigo-300 font-semibold">Learn more &rarr;</a>
+                    </div>
+                    <div class="order-1 md:order-2"><img src="img0.png" alt="Team collaboration" class="rounded-xl shadow-2xl w-full h-auto" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1F2937/E5E7EB?text=Image+Not+Found';"></div>
                 </div>
-                <div class="column">
-                    <img src="img1.webp" alt="Team collaboration in a modern office setting" width="500" height="300">
+                <div class="reveal grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+                    <div><img src="img1.png" alt="Strategic planning" class="rounded-xl shadow-2xl w-full h-auto" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1F2937/E5E7EB?text=Image+Not+Found';"></div>
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Our Approach</h2>
+                        <p class="text-gray-400 mb-6">Our unique approach combines the expertise of seasoned professionals, access to a vast network, and a deep understanding of market interplay. We foster a culture of collaboration to unlock new opportunities, overcome challenges, and create lasting value that resonates for years to come.</p>
+                        <a href="#contact" class="text-indigo-400 hover:text-indigo-300 font-semibold">Our process &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 md:py-32 gradient-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="reveal text-3xl md:text-4xl font-bold text-white mb-4">Our Portfolio</h2>
+                    <p class="reveal text-gray-400">A look into the cutting-edge companies we are proud to partner with, revolutionizing their respective industries.</p>
+                </div>
+                <div class="reveal grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-800 p-8 rounded-xl card-hover">
+                        <img src="qsd_logo.png" alt="QSD Logo" class="h-20 w-20 mx-auto mb-6 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/150x150/111827/FFFFFF?text=Logo';">
+                        <h3 class="text-xl font-bold text-white text-center mb-2">Quantitative System Dynamics</h3>
+                        <p class="text-gray-400 text-center">A cutting-edge technology company revolutionizing data analysis and predictive modeling.</p>
+                    </div>
+                    <div class="bg-gray-800 p-8 rounded-xl card-hover">
+                        <img src="https://placehold.co/150x150/111827/FFFFFF?text=YOU" alt="YOU Logo" class="h-20 w-20 mx-auto mb-6 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/150x150/111827/FFFFFF?text=Logo';">
+                        <h3 class="text-xl font-bold text-white text-center mb-2">YOU Political Engagement Platforms</h3>
+                        <p class="text-gray-400 text-center">Pioneering sustainable and equitable political engagement solutions for the American public.</p>
+                    </div>
+                    <div class="bg-gray-800 p-8 rounded-xl card-hover">
+                        <img src="https://placehold.co/150x150/111827/FFFFFF?text=ALI" alt="ALI Logo" class="h-20 w-20 mx-auto mb-6 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/150x150/111827/FFFFFF?text=Logo';">
+                        <h3 class="text-xl font-bold text-white text-center mb-2">Autonomous Language Intelligence</h3>
+                        <p class="text-gray-400 text-center">Building cutting-edge language models for a variety of enterprise applications.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="approach" class="container">
-            <h2 class="section-title">Our Approach</h2>
-            <div class="two-column">
-                <div class="column">
-                    <img src="img2.webp" alt="Strategic planning session with graphs and charts" width="500" height="300">
+        <!-- Core Values Section -->
+        <section id="values" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                 <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="reveal text-3xl md:text-4xl font-bold text-white mb-4">Our Core Values</h2>
+                    <p class="reveal text-gray-400">Our principles are the bedrock of every decision we make and every partnership we forge.</p>
                 </div>
-                <div class="column">
-                    <p>We've developed a distinctive approach that sets us apart from other management agencies. Our unique approach combines the expertise of our seasoned professionals, access to a vast network of resources, and a deep understanding of the complex interplay between industries and markets to drive success for our partners. We believe that the most innovative and effective solutions often emerge from the intersection of diverse perspectives and expertise, which is why we're committed to fostering a culture of collaboration and open communication. By bringing together talented individuals, cutting-edge resources, and strategic partnerships, we empower our partners to stay ahead of the curve and achieve sustainable growth that benefits not just their bottom line, but also their people, their communities, and the environment. By harnessing the power of collaboration and innovation, we help our partners unlock new opportunities, overcome challenges, and create lasting value that resonates for years to come.</p>
+                <div class="reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+                    <div class="bg-gray-800/50 p-8 rounded-xl"><div class="flex items-center justify-center h-16 w-16 bg-indigo-500/20 text-indigo-400 rounded-full mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1m0-1V4m0 2.01V5M12 20v-1m0-1v-1m0-1v-1m0-1v-1m0-1v-1m0-1v-1m0 0v-1m0 0V8m0 0h.01M12 8h-1m-1 0H9m-1.5 0H6m-1 0H4m1.01 0H5m14-4l-1.5 1.5M19 8l-1.5-1.5M10.5 19.5L9 18m1.5-1.5L12 15m0 0l1.5 1.5M15 12l1.5-1.5M12 9l1.5-1.5M7.5 4.5L9 6m-1.5 1.5L6 9m0 0l1.5 1.5M9 12l-1.5 1.5M4.5 7.5L6 9m1.5 1.5L9 12m0 0l-1.5-1.5M13.5 19.5L15 18m-1.5-1.5L12 15m0 0l-1.5 1.5M9 12l1.5-1.5" /></svg></div><h3 class="text-xl font-bold text-white mb-2">Social Responsibility</h3><p class="text-gray-400">Recognizing our actions have a ripple effect on the communities we serve and the world at large.</p></div>
+                    <div class="bg-gray-800/50 p-8 rounded-xl"><div class="flex items-center justify-center h-16 w-16 bg-indigo-500/20 text-indigo-400 rounded-full mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h10a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.732 4.076a2 2 0 012.236 0l4.064 3.482a2 2 0 010 3.88l-4.064 3.482a2 2 0 01-2.236 0L3.668 11.438a2 2 0 010-3.88l4.064-3.482z" /></svg></div><h3 class="text-xl font-bold text-white mb-2">Equity</h3><p class="text-gray-400">Striving to create a level playing field where everyone has access to the resources and opportunities they need to thrive.</p></div>
+                    <div class="bg-gray-800/50 p-8 rounded-xl"><div class="flex items-center justify-center h-16 w-16 bg-indigo-500/20 text-indigo-400 rounded-full mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div><h3 class="text-xl font-bold text-white mb-2">Collaboration</h3><p class="text-gray-400">Knowing that together, we can achieve far more than we ever could alone, creating positive, lasting impact.</p></div>
+                    <div class="bg-gray-800/50 p-8 rounded-xl"><div class="flex items-center justify-center h-16 w-16 bg-indigo-500/20 text-indigo-400 rounded-full mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg></div><h3 class="text-xl font-bold text-white mb-2">Innovation</h3><p class="text-gray-400">Continuously seeking novel solutions and embracing change to stay ahead of the ever-evolving business landscape.</p></div>
+                    <div class="bg-gray-800/50 p-8 rounded-xl"><div class="flex items-center justify-center h-16 w-16 bg-indigo-500/20 text-indigo-400 rounded-full mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg></div><h3 class="text-xl font-bold text-white mb-2">Integrity</h3><p class="text-gray-400">Operating with unwavering honesty, transparency, and ethical principles in all our partnerships and decisions.</p></div>
+                    <div class="bg-gray-800/50 p-8 rounded-xl"><div class="flex items-center justify-center h-16 w-16 bg-indigo-500/20 text-indigo-400 rounded-full mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h1.172a2 2 0 001.414-.586l2.828-2.828a2 2 0 000-2.828l-2.828-2.828a2 2 0 00-1.414-.586H9a2 2 0 00-2 2v1a2 2 0 01-2 2H3.055a1 1 0 01-.707-1.707l1.414-1.414a1 1 0 011.414 0l.707.707m9.193 5.657l-1.414 1.414a1 1 0 01-1.414 0l-.707-.707m-9.193-5.657l1.414-1.414a1 1 0 011.414 0l.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div><h3 class="text-xl font-bold text-white mb-2">Sustainability</h3><p class="text-gray-400">Committing to long-term growth that is environmentally conscious and beneficial for future generations.</p></div>
+                    <div class="bg-gray-800/50 p-8 rounded-xl"><div class="flex items-center justify-center h-16 w-16 bg-indigo-500/20 text-indigo-400 rounded-full mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg></div><h3 class="text-xl font-bold text-white mb-2">Excellence</h3><p class="text-gray-400">Pursuing the highest standards of quality and performance in every facet of our work for our partners.</p></div>
+                    <div class="bg-gray-800/50 p-8 rounded-xl"><div class="flex items-center justify-center h-16 w-16 bg-indigo-500/20 text-indigo-400 rounded-full mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg></div><h3 class="text-xl font-bold text-white mb-2">Adaptability</h3><p class="text-gray-400">Remaining agile and responsive, embracing new challenges and opportunities with flexibility and foresight.</p></div>
+                    <div class="bg-gray-800/50 p-8 rounded-xl"><div class="flex items-center justify-center h-16 w-16 bg-indigo-500/20 text-indigo-400 rounded-full mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg></div><h3 class="text-xl font-bold text-white mb-2">Empowerment</h3><p class="text-gray-400">Providing our partners with the tools, resources, and confidence they need to achieve their full potential.</p></div>
                 </div>
             </div>
         </section>
 
-        <section id="portfolio" class="container">
-            <h2 class="section-title">Our Portfolio</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="qsd.png" alt="Quantitative System Dynamics logo" width="150" height="150">
-                    <h3>Quantitative System Dynamics</h3>
-                    <p>A cutting-edge technology company revolutionizing data analysis and predictive modeling.</p>
+        <!-- ============================================= -->
+        <!-- Partnership Opportunities Section (REVISED) -->
+        <!-- ============================================= -->
+        <section id="opportunities" class="py-20 md:py-32 gradient-bg">
+            <div class="container mx-auto px-6">
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="reveal text-4xl md:text-5xl font-bold text-white mb-4">Let's Build the Future, Together</h2>
+                    <p class="reveal text-lg text-gray-300">We believe in the power of synergy. We seek partners who are not just building businesses, but shaping the future. Explore how we can align our visions and grow as one.</p>
                 </div>
-                <!-- Add more portfolio items as needed -->
+
+                <!-- Who We Partner With -->
+                <div class="reveal mb-24">
+                    <h3 class="text-3xl font-bold text-white text-center mb-12">Who We Partner With</h3>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-gray-800 p-8 rounded-xl text-center card-hover">
+                            <h4 class="text-2xl font-bold text-indigo-400 mb-3">The Visionary Startup</h4>
+                            <p class="text-gray-400">Early-stage companies with disruptive ideas needing strategic guidance and resources to achieve market fit.</p>
+                        </div>
+                        <div class="bg-gray-800 p-8 rounded-xl text-center card-hover">
+                            <h4 class="text-2xl font-bold text-indigo-400 mb-3">The Ambitious Scale-Up</h4>
+                            <p class="text-gray-400">Growing businesses seeking to expand their reach, optimize operations, and break into new markets.</p>
+                        </div>
+                        <div class="bg-gray-800 p-8 rounded-xl text-center card-hover">
+                            <h4 class="text-2xl font-bold text-indigo-400 mb-3">The Innovative Enterprise</h4>
+                            <p class="text-gray-400">Established corporations looking to foster an intrapreneurial culture and forge alliances with agile innovators.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Our Partnership Process -->
+                <div class="reveal grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-8">Our Path to Partnership</h3>
+                        <div>
+                            <div class="process-step">
+                                <h4 class="text-xl font-semibold text-white mb-2">1. Initial Connection</h4>
+                                <p class="text-gray-400">It all starts with a conversation. Reach out through the form below to share your vision with us.</p>
+                            </div>
+                            <div class="process-step">
+                                <h4 class="text-xl font-semibold text-white mb-2">2. Discovery Session</h4>
+                                <p class="text-gray-400">A collaborative meeting where we dive deep into your goals, challenges, and opportunities.</p>
+                            </div>
+                            <div class="process-step">
+                                <h4 class="text-xl font-semibold text-white mb-2">3. Synergy Assessment</h4>
+                                <p class="text-gray-400">Our team evaluates strategic alignment with our core values, expertise, and portfolio ecosystem.</p>
+                            </div>
+                            <div class="process-step">
+                                <h4 class="text-xl font-semibold text-white mb-2">4. Bespoke Proposal</h4>
+                                <p class="text-gray-400">We craft a tailored partnership proposal designed to unlock potential and drive mutual growth.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="bg-gray-800/50 p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-white mb-6">Start a Conversation</h3>
+                        <form action="#" method="POST">
+                            <div class="mb-5">
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-300">Full Name</label>
+                                <input type="text" id="name" name="name" class="w-full bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 p-2.5" placeholder="Johnathan Doeverman" required>
+                            </div>
+                            <div class="mb-5">
+                                <label for="company" class="block mb-2 text-sm font-medium text-gray-300">Company</label>
+                                <input type="text" id="company" name="company" class="w-full bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 p-2.5" placeholder="Your Company Inc.">
+                            </div>
+                             <div class="mb-5">
+                                <label for="email" class="block mb-2 text-sm font-medium text-gray-300">Email Address</label>
+                                <input type="email" id="email" name="email" class="w-full bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 p-2.5" placeholder="you@company.com" required>
+                            </div>
+                            <div class="mb-5">
+                                <label for="message" class="block mb-2 text-sm font-medium text-gray-300">Your Vision</label>
+                                <textarea id="message" name="message" rows="4" class="w-full bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 p-2.5" placeholder="Tell us about your vision..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-5 rounded-lg transition-colors duration-300">Submit Inquiry</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="opportunities" class="container">
-            <br>
-            <h2 class="section-title">Partnership Opportunities</h2>
-            <p>We're passionate about building meaningful relationships with like-minded companies and individuals who share our commitment to innovation and growth. We're always on the lookout for new partners to collaborate with, whether you're a startup looking to disrupt the status quo, a scale-up seeking to expand your reach, or an established business aiming to stay ahead of the competition. If you're as excited about the possibilities of collaboration as we are, we'd love to hear from you. Get in touch with us to explore the opportunities that await when we work together. Our team is dedicated to listening to your unique needs, understanding your goals, and identifying areas where our expertise and resources can help drive your success. By partnering with us, you'll gain access to a network of experts, resources, and connections that can help you overcome challenges, seize new opportunities, and achieve sustainable growth. Let's start a conversation today and see how we can grow together, creating a brighter future for your business and beyond.</p>
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="#contact" class="cta-button">Get in Touch</a>
-            </div>
-        </section>
-
-        <section id="values" class="container">
-            <br>
-            <h2 class="section-title">Our Values</h2>
-            <div class="two-column">
-                <div class="column">
-                    <p>We believe that business success and social responsibility go hand in hand. We're committed to operating with a strong sense of purpose, guided by a set of core principles that inform every decision we make and every partnership we forge. We value social responsibility, recognizing that our actions have a ripple effect on the communities we serve and the world at large. We're dedicated to promoting equity, striving to create a level playing field where everyone has access to the resources and opportunities they need to thrive. And we believe in the power of collaboration, knowing that together, we can achieve far more than we ever could alone. These principles shape our partnerships, ensuring that we work with organizations and individuals who share our commitment to creating positive impact. Whether it's through sustainable practices, community engagement, or innovative solutions, we're dedicated to making a difference in everything we do. By integrating social responsibility, equity, and collaboration into the fabric of our business, we aim to create a lasting legacy that benefits not just our partners and stakeholders, but also the environment and future generations.</p>
-                </div>
-                <div class="column">
-                    <img src="img3.webp" alt="Diverse team working together, representing our values" width="500" height="300">
-                </div>
-            </div>
-        </section>
     </main>
 
-    <footer id="contact">
-        <div class="container">
-            <h2>Connect With Our Team</h2>
-            <p>Email: mail@hatov.enterprises</p>
-            <p><b>Phone: +1 (202) 345 - 5102</b></p>
-            <div class="social-links">
-                <a href="https://x.com/HatovManagement" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                    </svg>
-                </a>
+    <!-- ============================================= -->
+    <!-- Footer Section                              -->
+    <!-- ============================================= -->
+    <footer id="contact" class="bg-gray-900">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
+                <!-- Footer Column 1: About -->
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-xl font-bold text-white mb-4">Hatov Enterprises</h3>
+                    <p class="text-gray-400">Fostering growth and innovation through strategic partnerships.</p>
+                </div>
+                
+                <!-- Footer Column 2: Contact Info -->
+                 <div class="mb-8 md:mb-0">
+                    <h3 class="text-xl font-bold text-white mb-4">Connect With Us</h3>
+                    <p class="text-gray-400 mb-2">Email: <a href="mailto:mail@hatov.enterprises" class="hover:text-indigo-400">mail@hatov.enterprises</a></p>
+                    <p class="text-gray-400">Phone: <a href="tel:+12023455102" class="hover:text-indigo-400">+1 (202) 345-5102</a></p>
+                </div>
+                
+                <!-- Footer Column 3: Social Links -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Follow Our Journey</h3>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="https://x.com/HatovManagement" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <!-- X (formerly Twitter) Icon -->
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <!-- Add other social media icons here -->
+                    </div>
+                </div>
+            </div>
+            <!-- Copyright notice -->
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 Hatov E&A LLC. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- ============================================= -->
+    <!-- JavaScript Logic                            -->
+    <!-- ============================================= -->
     <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        // --- Mobile Menu Toggle ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
                 });
-            });
+            }
         });
 
-        // Add a scroll animation to reveal sections
-        const revealSections = document.querySelectorAll('section');
-
-        const revealSection = (entries, observer) => {
+        // --- Reveal on Scroll Animation ---
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    observer.unobserve(entry.target);
+                    entry.target.classList.add('visible');
                 }
             });
-        };
-
-        const sectionObserver = new IntersectionObserver(revealSection, {
-            root: null,
-            threshold: 0.15,
+        }, {
+            threshold: 0.1
         });
 
-        revealSections.forEach(section => {
-            sectionObserver.observe(section);
-            section.classList.add('section--hidden');
+        revealElements.forEach(el => {
+            observer.observe(el);
         });
 
-        // Add this CSS to your existing styles
-        document.head.insertAdjacentHTML('beforeend', `
-            <style>
-                .section--hidden {
-                    opacity: 0;
-                    transform: translateY(8rem);
-                }
-                section {
-                    transition: transform 1s, opacity 1s;
-                }
-                .revealed {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            </style>
-        `);
     </script>
 </body>
 </html>
